@@ -64,7 +64,7 @@ if [ "$1" == "list2s" ]; then
 
 elif [ "$1" == "all" ]; then
 	echo "$(date +%d/%m/%y) lanzado all" >> $FILE_LOG
-	all_dockers=$(docker images | awk 'NR > 1 {print $1}' | grep -v -E "$all_exclude" | sort | uniq)
+	all_dockers=$(docker images | awk 'NR > 1 {print $1 ":" $2}' | grep -v -E "$all_exclude" | sort | uniq)
 	for line in $all_dockers; do
 		if [ "$(check_size_disk)" -gt 90 ]; then
 			message="$message
