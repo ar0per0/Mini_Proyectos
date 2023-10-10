@@ -10,7 +10,7 @@ FILE_LOG="notificar_actualizacion_dockers.log"
 message=""
 
 count_image_docker(){
-	local number=$(docker images | grep "$1" | wc -l)
+	local number=$(docker images | grep "$name_docker" | wc -l)
 	echo $number
 }
 
@@ -26,20 +26,21 @@ docker_pull(){
 }
 
 check_docker(){
-	local count_image=$(count_image_docker "$1")
+	local name_docker = $(echo "$1" | cut -d ':' -f1)
+	local count_image=$(count_image_docker "$name_docker")
 	if [ "$count_image" -gt 1 ]; then
 		message="$message
 		          - El $1 ya estaba pendiente."
 		if $(docker_pull "$1"); then
-			local count_image_pending_pull=$(count_image_docker "$1")
+			local count_image_pending_pull=$(count_image_docker "$name_docker")
 			if [ "$count_image_pending_pull" -gt 2 ]; then
-				local rm_image=$(docker images | grep "$1" | awk 'NR==2 {print $3}')
+				local rm_image=$(docker images | grep "$name_docker" | awk 'NR==2 {print $3}')
 				echo "docker image rm $rm_image"
 			fi
 		fi
 	else
 		if $(docker_pull "$1"); then
-			local count_image_pull=$(count_image_docker "$1")
+			local count_image_pull=$(count_image_docker "$name_docker")
 			if [ "$count_image_pull" -gt 1 ]; then
 				message="$message
 				          - El $1 se puede actualizar."
