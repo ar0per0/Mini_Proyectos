@@ -6,6 +6,7 @@ list2s=("vaultwarden/server" "jc21/nginx-proxy-manager")
 all_exclude="ubuntu_ok|kasmweb/ubuntu-jammy-dind:1.13.0|octoprint/octoprint"
 
 
+FILE_LOG="notificar_actualizacion_dockers.log"
 message=""
 
 count_image_docker(){
@@ -56,11 +57,13 @@ check_size_disk(){
 
 #### Listas a comprobar
 if [ "$1" == "list2s" ]; then
+	echo "$(date +%d/%m/%y) lanzado list2s" >> $FILE_LOG
 	for item in "${list2s[@]}"; do
 		check_docker $item
 	done
 
 elif [ "$1" == "all" ]; then
+	echo "$(date +%d/%m/%y) lanzado all" >> $FILE_LOG
 	all_dockers=$(docker images | awk 'NR > 1 {print $1}' | grep -v -E "$all_exclude" | sort | uniq)
 	for line in $all_dockers; do
 		if [ "$(check_size_disk)" -gt 90 ]; then
@@ -74,6 +77,7 @@ fi
 
 #### Notificar a telegram
 if [ "$message" != "" ]; then
+	echo "$(date +%d/%m/%y) mensaje: $message" >> $FILE_LOG
 	message="🛠 Dockers actualizar:$message"
 	~/Mini_Proyectos/bot_telegram/bot_telegram_message.sh "$message"
 fi
