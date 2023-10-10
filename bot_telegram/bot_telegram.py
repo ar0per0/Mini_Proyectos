@@ -1,7 +1,7 @@
 #### BOT TELEGRAM ####
 # -pyTelegramBotAPI https://github.com/eternnoir/pyTelegramBotAPI
 
-# iniciar automaticamente al iniciar equipo agregar comando, /etc/rc.local ---> su {usuario} -c "python /{ruta}/bot_telegram.py &"
+# iniciar automaticamente al iniciar equipo agregar comando, /etc/rc.local ---> su {usuario} -c "python ~/Mini_Proyectos/bot_telegram/bot_telegram.py &"
 
 import telebot
 from telebot import types
@@ -12,7 +12,7 @@ import secret_bot_telegram
 TOKEN = secret_bot_telegram.TOKEN
 USERS = secret_bot_telegram.USERS  # Comprovar id user @userinfobot
 USER_ADMIN = secret_bot_telegram.USER_ADMIN
-FILE_LOG = "bot_telegram.log"
+FILE_LOG = os.path.expanduser("~/Mini_Proyectos/bot_telegram/bot_telegram.log")
 TOKEN_PRINTER3D = secret_bot_telegram.TOKEN_PRINTER3D
 
 docker_lisen = False
