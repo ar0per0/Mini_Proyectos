@@ -26,7 +26,7 @@ docker_pull(){
 }
 
 check_docker(){
-	local name_docker = $(echo "$1" | cut -d ':' -f1)
+	local name_docker=$(echo "$1" | cut -d':' -f1)
 	local count_image=$(count_image_docker "$name_docker")
 	if [ "$count_image" -gt 1 ]; then
 		message="$message
