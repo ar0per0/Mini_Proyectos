@@ -10,7 +10,7 @@ FILE_LOG="notificar_actualizacion_dockers.log"
 message=""
 
 count_image_docker(){
-	local number=$(docker images | grep "$name_docker" | wc -l)
+	local number=$(docker images | grep "$1" | wc -l)
 	echo $number
 }
 
