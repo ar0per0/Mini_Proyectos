@@ -1,10 +1,9 @@
 #!/bin/bash
-source secret_bot_telegram
+source ~/Mini_Proyectos/bot_telegram/secret_bot_telegram
 #TOKEN=""
 #ID_USER=""
 MESSAGE="No se ha pasado ningún mensaje"
 URL="https://api.telegram.org/bot$TOKEN/sendMessage"
-
 if [ -n "$1" ]; then
 	MESSAGE=$1
 fi
