@@ -2,5 +2,5 @@
  - Referencia: "Autoexec Service" (https://kodi.wiki/view/Autoexec_Service)
 
 path carpeta:
-Windows: C:\Program Files\Kodi\addons\service.autoexec
-Linux: /storage/.kodi/addons/service.autoexec
+- Windows: C:\Program Files\Kodi\addons\service.autoexec
+- Linux: /storage/.kodi/addons/service.autoexec
